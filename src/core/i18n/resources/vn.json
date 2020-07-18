@@ -1,3 +1,21 @@
 {
-  "TEST": "Thử"
+  "CITY_LIST": "Danh sách thành phố",
+  "FEELS_LIKE": "Cảm giác như: {{value}}°",
+  "TEMP": "Nhiệt Độ Trung Bình",
+  "MIN_TEMP": "Nhiệt Độ Thấp Nhất",
+  "MAX_TEMP": "Nhiệt Độ Cao Nhất",
+  "ADD_NEW_CITY": "Thêm Mới Thành Phố",
+  "CLOSE": "Đóng",
+  "INPUT_CITY_NAME": "Tìm theo tên thành phố",
+  "SEARCH": "Tìm kiếm",
+  "SEARCH_RESULT": "Kết quả tìm kiếm",
+  "NO_RESULT": "Không tìm thấy kết quả",
+  "SELECTED_CITIES": "Thành Phố Đã Chọn",
+  "DISABLED_ADD_MESSAGE": "Bạn đã chọn thành phố này hoặc đã đạt tối đa 10 thành phố.",
+  "ADD": "Thêm",
+  "REMOVE": "Xóa",
+  "MORNING": "Sáng",
+  "AFTERNOON": "Trưa",
+  "EVENING": "Chiều",
+  "NIGHT": "Tối"
 }
