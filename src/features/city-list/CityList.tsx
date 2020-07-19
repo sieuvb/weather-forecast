@@ -29,10 +29,13 @@ const GridContainer = styled.div`
   }
 `
 
-export const CityList = observer(({}) => {
+export const CityList = observer(() => {
   const { t } = useTranslation()
   const [modalVisible, setModalVisible] = React.useState(false)
+
   const selectedCities = appModel.cityModel.selectedCities
+  const currentCity = appModel.cityModel.currentCity
+
   const onClickAddCity = () => {
     setModalVisible(true)
   }
@@ -47,8 +50,9 @@ export const CityList = observer(({}) => {
         <CardContainer onClick={onClickAddCity}>
           <PlusCircleOutlined style={{ fontSize: "36px" }} />
           <br />
-          <Typography.Text>{t("ADD_NEW_CITY")}</Typography.Text>
+          <Typography.Text strong>{t("ADD_NEW_CITY")}</Typography.Text>
         </CardContainer>
+        {currentCity && <WeatherCardItem city={currentCity} isCurrentLocation />}
         {selectedCities.map((city) => (
           <WeatherCardItem key={city.id} city={city} />
         ))}

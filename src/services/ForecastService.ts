@@ -23,6 +23,19 @@ export class ForecastService {
     })
   }
 
+  searchCityByLocation(lat: number, lon: number) {
+    return this.instance.request({
+      method: "GET",
+      url: "/find",
+      params: {
+        lat,
+        lon,
+        appId: API_KEY,
+        units: "metric",
+      },
+    })
+  }
+
   fetchWeatherDetail(lat: string, lon: string) {
     return this.instance.request({
       method: "GET",

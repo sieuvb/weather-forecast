@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 import { CardContainer } from "./components"
 import { Typography, Button, Tooltip } from "antd"
-import { CloseOutlined } from "@ant-design/icons"
+import { CloseOutlined, EnvironmentTwoTone } from "@ant-design/icons"
 import { ICity, getWeatherImageUrl } from "shared"
 import { appModel } from "models"
 import { useTranslation } from "react-i18next"
@@ -10,6 +10,7 @@ import { Temperature } from "components"
 
 interface IWeatherCardItemProps {
   city: ICity
+  isCurrentLocation?: boolean
 }
 
 const Container = styled(CardContainer)`
@@ -41,7 +42,7 @@ const TemperatureContainer = styled.div`
   align-items: baseline;
 `
 
-export const WeatherCardItem: React.FC<IWeatherCardItemProps> = ({ city }) => {
+export const WeatherCardItem: React.FC<IWeatherCardItemProps> = ({ city, isCurrentLocation }) => {
   const { t } = useTranslation()
   const onClickRemoveItem = () => {
     appModel.cityModel.removeCity(city)
@@ -60,7 +61,15 @@ export const WeatherCardItem: React.FC<IWeatherCardItemProps> = ({ city }) => {
         danger
         icon={<CloseOutlined />}
       ></Button>
-      <Typography.Title level={2}>{city.name}</Typography.Title>
+      <Typography.Title level={2}>
+        {isCurrentLocation && (
+          <Tooltip title={t("CURRENT_LOCATION")}>
+            <EnvironmentTwoTone twoToneColor="#05336b" />
+          </Tooltip>
+        )}
+        &nbsp;
+        {city.name}
+      </Typography.Title>
       <img src={getWeatherImageUrl(city.weather[0].icon)} />
       <Typography.Title level={4}>{city.weather[0].description}</Typography.Title>
       <br />

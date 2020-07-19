@@ -1,6 +1,5 @@
 import * as React from "react"
 import { observer } from "mobx-react-lite"
-import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import { Typography, Button, Tooltip } from "antd"
 import { appModel } from "models"

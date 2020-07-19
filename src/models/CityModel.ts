@@ -1,4 +1,4 @@
-import { observable, action, computed } from "mobx"
+import { observable, action, computed, reaction } from "mobx"
 import { forecastService } from "services/ForecastService"
 import { ICity, LOCAL_STORAGE_KEY } from "shared"
 import { get, isEmpty } from "lodash"
@@ -9,6 +9,8 @@ export class CityModel {
   @observable isSearching: boolean = false
   @observable selectedCities: ICity[] = []
   @observable searchedCities: ICity[] = []
+  @observable currentCoords?: Coordinates
+  @observable currentCity?: ICity
 
   constructor() {
     const savedCities = localStorage.getItem(LOCAL_STORAGE_KEY.SELECTED_CITIES)
@@ -16,6 +18,21 @@ export class CityModel {
     if (!isEmpty(savedCities)) {
       this.selectedCities = JSON.parse(savedCities as string)
     }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.currentCoords = position.coords
+    })
+
+    reaction(
+      () => this.currentCoords,
+      async (currentCoords) => {
+        if (currentCoords) {
+          const response = await forecastService.searchCityByLocation(currentCoords.latitude, currentCoords.longitude)
+          this.currentCity = get(response.data, "list.0")
+        }
+      },
+      { fireImmediately: true }
+    )
   }
 
   @computed

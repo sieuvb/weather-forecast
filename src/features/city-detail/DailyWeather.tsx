@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
 import { Temperature } from "components"
-import { appModel } from "models"
 import { observer } from "mobx-react-lite"
 import { Typography } from "antd"
 import { convertUnixToDate, getWeatherImageUrl, IDailyWeather } from "shared"

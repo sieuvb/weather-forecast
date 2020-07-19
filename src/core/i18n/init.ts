@@ -19,12 +19,14 @@ const resources = {
 export const i18nInstance = i18n.use(initReactI18next)
 
 export const init = () => {
-  const defaultLanguage = localStorage.getItem(LOCAL_STORAGE_KEY.LANGUAGE) || DEFAULT_LANGUAGE
-  localStorage.setItem(LOCAL_STORAGE_KEY.LANGUAGE, DEFAULT_LANGUAGE)
+  const defaultLanguage = localStorage.getItem(LOCAL_STORAGE_KEY.LANGUAGE)
+  if (!defaultLanguage) {
+    localStorage.setItem(LOCAL_STORAGE_KEY.LANGUAGE, DEFAULT_LANGUAGE)
+  }
 
   i18nInstance.init({
     resources,
-    lng: defaultLanguage,
+    lng: defaultLanguage || DEFAULT_LANGUAGE,
 
     keySeparator: false,
 

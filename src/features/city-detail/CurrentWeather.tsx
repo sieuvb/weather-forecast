@@ -1,10 +1,11 @@
 import * as React from "react"
+import * as Moment from "moment"
 import styled from "styled-components"
 import { Temperature } from "components"
 import { appModel } from "models"
 import { observer } from "mobx-react-lite"
 import { Typography } from "antd"
-import { convertUnixToDate, getWeatherImageUrl, ICity } from "shared"
+import { getWeatherImageUrl, ICity, DISPLAY_DATE_FORMAT } from "shared"
 import { useTranslation } from "react-i18next"
 import { CardContainer } from "./components"
 
@@ -20,12 +21,11 @@ const RightContainer = styled.div`
 export const CurrentWeather: React.FC = observer(() => {
   const { t } = useTranslation()
   const selectedCity = appModel.weatherDetailModel.selectedCity as ICity
-  const currentWeatherDetail = appModel.weatherDetailModel.weatherDetail?.current
 
   return (
     <CardContainer>
       <LeftContainer>
-        <Typography.Title level={3}>{convertUnixToDate(currentWeatherDetail?.dt)}</Typography.Title>
+        <Typography.Title level={3}>{Moment.default().format(DISPLAY_DATE_FORMAT)}</Typography.Title>
         <Typography.Title>
           <Temperature value={selectedCity?.main?.temp} tooltipMessage={t("TEMP")} />
         </Typography.Title>
