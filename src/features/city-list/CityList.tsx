@@ -43,7 +43,7 @@ export const CityList = observer(() => {
       (error) => {
         console.error("[Location] Error occurred: ", { error })
       },
-      { timeout: 1000 }
+      { timeout: 5000 }
     )
   }, [])
 
