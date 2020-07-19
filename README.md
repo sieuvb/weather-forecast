@@ -1,3 +1,20 @@
+## Project Website
+
+https://shrouded-depths-49587.herokuapp.com/
+
+## Features
+
+- View, store locally city list, Add city
+- View weather detail of city
+- Languages support: en, vn
+- Load weather of default current location
+
+## Tech stack
+
+- React, mobx, react-dom, react-i18next, create-react-app, axios, typescript
+- Ant Design, styled-component
+- Unit test: Jest
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
