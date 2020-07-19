@@ -19,10 +19,6 @@ export class CityModel {
       this.selectedCities = JSON.parse(savedCities as string)
     }
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.currentCoords = position.coords
-    })
-
     reaction(
       () => this.currentCoords,
       async (currentCoords) => {
@@ -39,6 +35,11 @@ export class CityModel {
   @computed
   get canAddNew() {
     return this.selectedCities.length < MAXIMUM_CITIES
+  }
+
+  @action
+  setCurrentCoords = (coords: Coordinates) => {
+    this.currentCoords = coords
   }
 
   @action

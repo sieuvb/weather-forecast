@@ -44,7 +44,8 @@ const TemperatureContainer = styled.div`
 
 export const WeatherCardItem: React.FC<IWeatherCardItemProps> = ({ city, isCurrentLocation }) => {
   const { t } = useTranslation()
-  const onClickRemoveItem = () => {
+  const onClickRemoveItem = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation()
     appModel.cityModel.removeCity(city)
   }
 
@@ -54,13 +55,15 @@ export const WeatherCardItem: React.FC<IWeatherCardItemProps> = ({ city, isCurre
 
   return (
     <Container onClick={onClickItem}>
-      <Button
-        className="delete-btn"
-        onClick={onClickRemoveItem}
-        shape="circle"
-        danger
-        icon={<CloseOutlined />}
-      ></Button>
+      {!isCurrentLocation && (
+        <Button
+          className="delete-btn"
+          onClick={onClickRemoveItem}
+          shape="circle"
+          danger
+          icon={<CloseOutlined />}
+        ></Button>
+      )}
       <Typography.Title level={2}>
         {isCurrentLocation && (
           <Tooltip title={t("CURRENT_LOCATION")}>

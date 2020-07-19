@@ -33,6 +33,20 @@ export const CityList = observer(() => {
   const { t } = useTranslation()
   const [modalVisible, setModalVisible] = React.useState(false)
 
+  React.useEffect(() => {
+    console.log({ navigator })
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log({ position })
+        appModel.cityModel.setCurrentCoords(position.coords)
+      },
+      (error) => {
+        console.error("[Location] Error occurred: ", { error })
+      },
+      { timeout: 1000 }
+    )
+  }, [])
+
   const selectedCities = appModel.cityModel.selectedCities
   const currentCity = appModel.cityModel.currentCity
 
