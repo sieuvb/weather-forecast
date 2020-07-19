@@ -31,7 +31,7 @@ export const CityDetail = observer((props: any) => {
 
   React.useEffect(() => {
     appModel.weatherDetailModel.init(id)
-  }, [])
+  }, [id])
 
   return (
     <Spin spinning={appModel.weatherDetailModel.loading}>

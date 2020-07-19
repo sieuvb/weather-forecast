@@ -10,12 +10,15 @@ export class WeatherDetailModel {
 
   @action
   init = (selectedCityId: string) => {
-    const savedSelectedCitiesJSON = localStorage.getItem(LOCAL_STORAGE_KEY.SELECTED_CITIES)
+    const savedSelectedCitiesJSON = localStorage.getItem(LOCAL_STORAGE_KEY.SELECTED_CITIES) as string
+    const savedCurrentCityJSON = localStorage.getItem(LOCAL_STORAGE_KEY.CURRENT_CITY) as string
 
-    if (!isEmpty(savedSelectedCitiesJSON)) {
-      const selectedCities = JSON.parse(savedSelectedCitiesJSON as string) as ICity[]
-      if (isArray(selectedCities)) {
-        this.selectedCity = selectedCities.find(({ id }) => String(id) === selectedCityId)
+    if (!isEmpty(savedSelectedCitiesJSON) || !isEmpty(savedCurrentCityJSON)) {
+      const selectedCities = JSON.parse(savedSelectedCitiesJSON) as ICity[]
+      const currentCity = !isEmpty(savedCurrentCityJSON) && (JSON.parse(savedCurrentCityJSON) as ICity)
+
+      if (isArray(selectedCities) || !isEmpty(currentCity)) {
+        this.selectedCity = selectedCities?.find(({ id }) => String(id) === selectedCityId) || currentCity || undefined
         this.fetchWeatherDetail()
       }
     }

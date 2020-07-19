@@ -3,7 +3,7 @@ import { forecastService } from "services/ForecastService"
 import { ICity, LOCAL_STORAGE_KEY } from "shared"
 import { get, isEmpty } from "lodash"
 
-const MAXIMUM_CITIES = 10
+export const MAXIMUM_CITIES = 10
 
 export class CityModel {
   @observable isSearching: boolean = false
@@ -29,6 +29,7 @@ export class CityModel {
         if (currentCoords) {
           const response = await forecastService.searchCityByLocation(currentCoords.latitude, currentCoords.longitude)
           this.currentCity = get(response.data, "list.0")
+          localStorage.setItem(LOCAL_STORAGE_KEY.CURRENT_CITY, JSON.stringify(this.currentCity))
         }
       },
       { fireImmediately: true }
